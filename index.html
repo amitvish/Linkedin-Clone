@@ -8,6 +8,11 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <!-- Google Sign-In client configuration -->
+    <meta name="google-signin-client_id" content="1017758397811-f5pd6cgksps4qqomauaslfjp00a5619q.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -45,10 +50,11 @@
                     <p class="mt-2 text-center text-sm text-gray-600">
                         or
                     </p>
-                    <button class="mt-2 w-full py-2 border rounded-md flex justify-center items-center">
+                    <!-- <button id="googleSignIn" class="mt-2 w-full py-2 border rounded-md flex justify-center items-center cursor-pointer">
                         <img src="https://placehold.co/20x20" alt="Google icon" class="mr-2">
                         Continue with Google
-                    </button>
+                    </button> -->
+                    <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark" class="text-center mt-4"></div>
                     <div class="text-center mt-4">
                         <a href="#" class="text-blue-600 hover:underline text-sm">New to LinkedIn? Join now</a>
                     </div>
@@ -59,6 +65,18 @@
             By clicking Continue, you agree to LinkedIn's User Agreement, Privacy Policy, and Cookie Policy.
         </footer>
     </div>
+    <script>
+        function onSignIn(googleUser) {
+          var profile = googleUser.getBasicProfile();
+          console.log('Google User ID: ' + profile.getId());
+          console.log('Google User Name: ' + profile.getName());
+          console.log('Google User Image URL: ' + profile.getImageUrl());
+          console.log('Google User Email: ' + profile.getEmail());
+          // The ID token you need to pass to your backend:
+          var id_token = googleUser.getAuthResponse().id_token;
+          console.log("Google User ID Token: " + id_token);
+        }
+      </script>
 </body>
 
 </html>
